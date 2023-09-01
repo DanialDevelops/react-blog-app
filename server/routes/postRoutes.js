@@ -21,4 +21,29 @@ router.post('/post', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    // Fetch all posts from the database
+    const posts = await Post.find();
+
+    res.json(posts);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    res.status(500).json({ error: 'Failed to fetch posts' });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const postId = req.params.id
+    // Fetch all posts from the database
+    const posts = await Post.findById(postId);
+
+    res.json(posts);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    res.status(500).json({ error: 'Failed to fetch posts' });
+  }
+});
+
 module.exports = router;

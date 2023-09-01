@@ -6,15 +6,15 @@ const mongoose = require('mongoose'); // For MongoDB connection
 const mongoURI = process.env.MONGODB_URI;
 const app = express();
 
-const userRoutes = require('./routes/userRoutes');
-const postRoutes = require('./routes/postRoutes');
-
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
-
 // Middleware
 app.use(express.json()); // Parse JSON request bodies
 app.use(cors()); // Enable CORS for all routes
+
+const userRoutes = require('./routes/userRoutes.js');
+const postRoutes = require('./routes/postRoutes.js');
+
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 
 mongoose.connect(mongoURI, {
